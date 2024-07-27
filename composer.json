@@ -1,0 +1,25 @@
+{
+    "name": "arkania/nacre-ui",
+    "description": "Nacre-UI est une API destiné aux formulaires, elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces, mais aussi éviter les taches fastidieuses à faire.",
+    "type": "library",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "pocketmine/pocketmine-mp": "^5.11",
+        "friendsofphp/php-cs-fixer": "^3.49"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "nacre\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dumont-Julien",
+            "email": "dumontj357@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

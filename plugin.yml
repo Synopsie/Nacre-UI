@@ -1,0 +1,6 @@
+name: Nacre-UI
+version: 1.0.0
+main: nacre\Main
+src-namespace-prefix: nacre
+api: 5.0.0
+author: Julien & TEZULS (bossbar)
