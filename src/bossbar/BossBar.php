@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace nacre\bossbar;
 
-use GlobalLogger;
 use InvalidArgumentException;
 use pocketmine\entity\Attribute;
 use pocketmine\entity\AttributeFactory;

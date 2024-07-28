@@ -1,33 +1,19 @@
 <?php
 
-/*
- *     _      ____    _  __     _      _   _   ___      _
- *    / \    |  _ \  | |/ /    / \    | \ | | |_ _|    / \
- *   / _ \   | |_) | | ' /    / _ \   |  \| |  | |    / _ \
- *  / ___ \  |  _ <  | . \   / ___ \  | |\  |  | |   / ___ \
- * /_/   \_\ |_| \_\ |_|\_\ /_/   \_\ |_| \_| |___| /_/   \_\
- *
- * Nacre-UI est une API destiné aux formulaires,
- * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
- * mais aussi éviter les taches fastidieuses à faire.
- *
- * @author Julien
- * @link https://arkaniastudios.com/Nacre-UI
- * @version 1.0.0
- *
- */
-
 declare(strict_types=1);
 
 namespace nacre\form\class;
 
 use nacre\form\BaseForm;
+use nacre\form\elements\buttons\ModalButton;
 use pocketmine\player\Player;
 
 final class ModalForm extends BaseForm {
+
 	private string $content;
-	private string $button1;
-	private string $button2;
+
+    /** @var ModalButton[]|string[] */
+	private array $buttons = [];
 
 	/** @var ?callable */
 	private $onSubmit;
@@ -36,18 +22,17 @@ final class ModalForm extends BaseForm {
 	private $onClose;
 
 	public function __construct(
-		Player $player,
 		string $title,
 		string $content,
-		string $button1,
-		string $button2,
+		ModalButton $button1,
+		ModalButton $button2,
 		?callable $onSubmit = null,
 		?callable $onClose = null
 	) {
-		parent::__construct($player, $title);
+		parent::__construct($title);
 		$this->content  = $content;
-		$this->button1  = $button1;
-		$this->button2  = $button2;
+		$this->buttons[0]  = $button1;
+		$this->buttons[1]  = $button2;
 		$this->onSubmit = $onSubmit;
 		$this->onClose  = $onClose;
 	}
@@ -59,7 +44,11 @@ final class ModalForm extends BaseForm {
 	public function handleResponse(Player $player, $data) : void {
 		if($data !== null) {
 			if($this->onSubmit !== null) {
-				($this->onSubmit)($player, $data);
+                if ($this->buttons[$data]->getPermission() !== null && !$player->hasPermission($this->buttons[$data]->getPermission())) {
+                    $player->sendMessage("§cYou don't have permission to use this button");
+                    return;
+                }
+				($this->onSubmit)($player, $this->buttons[$data]->getName());
 			}
 		} else {
 			if($this->onClose !== null) {
@@ -73,9 +62,9 @@ final class ModalForm extends BaseForm {
 			'type'       => $this->getType(),
 			'title'      => $this->title,
 			'content'    => $this->content,
-			'button1'    => $this->button1,
-			'button2'    => $this->button2,
-			'permission' => $this->permission
+			'button1'    => $this->buttons[0]->getName(),
+			'button2'    => $this->buttons[1]->getName(),
+			'permission' => $this->getPermission()
 		];
 	}
 

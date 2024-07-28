@@ -1,22 +1,5 @@
 <?php
 
-/*
- *     _      ____    _  __     _      _   _   ___      _
- *    / \    |  _ \  | |/ /    / \    | \ | | |_ _|    / \
- *   / _ \   | |_) | | ' /    / _ \   |  \| |  | |    / _ \
- *  / ___ \  |  _ <  | . \   / ___ \  | |\  |  | |   / ___ \
- * /_/   \_\ |_| \_\ |_|\_\ /_/   \_\ |_| \_| |___| /_/   \_\
- *
- * Nacre-UI est une API destiné aux formulaires,
- * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
- * mais aussi éviter les taches fastidieuses à faire.
- *
- * @author Julien
- * @link https://arkaniastudios.com/Nacre-UI
- * @version 1.0.0
- *
- */
-
 declare(strict_types=1);
 
 namespace nacre\form\class;
@@ -39,14 +22,13 @@ class SimpleForm extends BaseForm {
 	private $onClose;
 
 	public function __construct(
-		Player $player,
 		string $title,
 		string $description = '',
 		array $buttons = [],
 		?callable $onSubmit = null,
 		?callable $onClose = null
 	) {
-		parent::__construct($player, $title);
+		parent::__construct($title);
 		$this->description = $description;
 		$this->buttons     = $buttons;
 		$this->onSubmit    = $onSubmit;
@@ -66,7 +48,7 @@ class SimpleForm extends BaseForm {
 			if($this->onSubmit !== null) {
 				$button = $this->buttons[$data];
 				if(($button->getPermission() !== null && $player->hasPermission($button->getPermission())) || $button->getPermission() === null) {
-					($this->onSubmit)($player, $data);
+					($this->onSubmit)($player, $button->getName());
 				} else {
 					$player->sendMessage("§cYou don't have permission to use this button");
 				}
