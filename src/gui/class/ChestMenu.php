@@ -1,19 +1,19 @@
 <?php
 
 /*
- *     _      ____    _  __     _      _   _   ___      _
- *    / \    |  _ \  | |/ /    / \    | \ | | |_ _|    / \
- *   / _ \   | |_) | | ' /    / _ \   |  \| |  | |    / _ \
- *  / ___ \  |  _ <  | . \   / ___ \  | |\  |  | |   / ___ \
- * /_/   \_\ |_| \_\ |_|\_\ /_/   \_\ |_| \_| |___| /_/   \_\
+ *  ____   __   __  _   _    ___    ____    ____    ___   _____
+ * / ___|  \ \ / / | \ | |  / _ \  |  _ \  / ___|  |_ _| | ____|
+ * \___ \   \ V /  |  \| | | | | | | |_) | \___ \   | |  |  _|
+ *  ___) |   | |   | |\  | | |_| | |  __/   ___) |  | |  | |___
+ * |____/    |_|   |_| \_|  \___/  |_|     |____/  |___| |_____|
  *
  * Nacre-UI est une API destiné aux formulaires,
  * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
  * mais aussi éviter les taches fastidieuses à faire.
  *
- * @author Julien
- * @link https://arkaniastudios.com/Nacre-UI
- * @version 1.0.0
+ * @author SynopsieTeam
+ * @link https://nacre.arkaniastudios.com/home.html
+ * @version 2.0.0
  *
  */
 
@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace nacre\gui\class;
 
 use nacre\gui\BaseMenu;
+use nacre\gui\InventoryContent;
 use nacre\gui\MenuTrait;
 use pocketmine\block\inventory\ChestInventory;
 use pocketmine\block\tile\Nameable;
@@ -41,6 +42,9 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 		MenuTrait::__construct as private __menuConstruct;
 	}
 
+	/**
+	 * @param InventoryContent[]|null $contents
+	 */
 	public function __construct(
 		Player $player,
 		string|Translatable $name,
@@ -51,7 +55,7 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 		?string $permission = null
 	) {
 		parent::__construct($player->getPosition());
-		$this->__menuConstruct($player, $name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
+		$this->__menuConstruct($name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
 	}
 
 	private array $isSent = [];

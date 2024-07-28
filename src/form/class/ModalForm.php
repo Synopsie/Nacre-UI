@@ -1,5 +1,22 @@
 <?php
 
+/*
+ *  ____   __   __  _   _    ___    ____    ____    ___   _____
+ * / ___|  \ \ / / | \ | |  / _ \  |  _ \  / ___|  |_ _| | ____|
+ * \___ \   \ V /  |  \| | | | | | | |_) | \___ \   | |  |  _|
+ *  ___) |   | |   | |\  | | |_| | |  __/   ___) |  | |  | |___
+ * |____/    |_|   |_| \_|  \___/  |_|     |____/  |___| |_____|
+ *
+ * Nacre-UI est une API destiné aux formulaires,
+ * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
+ * mais aussi éviter les taches fastidieuses à faire.
+ *
+ * @author SynopsieTeam
+ * @link https://nacre.arkaniastudios.com/home.html
+ * @version 2.0.0
+ *
+ */
+
 declare(strict_types=1);
 
 namespace nacre\form\class;
@@ -9,10 +26,9 @@ use nacre\form\elements\buttons\ModalButton;
 use pocketmine\player\Player;
 
 final class ModalForm extends BaseForm {
-
 	private string $content;
 
-    /** @var ModalButton[]|string[] */
+	/** @var ModalButton[]|string[] */
 	private array $buttons = [];
 
 	/** @var ?callable */
@@ -30,11 +46,11 @@ final class ModalForm extends BaseForm {
 		?callable $onClose = null
 	) {
 		parent::__construct($title);
-		$this->content  = $content;
-		$this->buttons[0]  = $button1;
-		$this->buttons[1]  = $button2;
-		$this->onSubmit = $onSubmit;
-		$this->onClose  = $onClose;
+		$this->content    = $content;
+		$this->buttons[0] = $button1;
+		$this->buttons[1] = $button2;
+		$this->onSubmit   = $onSubmit;
+		$this->onClose    = $onClose;
 	}
 
 	public function getType() : string {
@@ -44,10 +60,10 @@ final class ModalForm extends BaseForm {
 	public function handleResponse(Player $player, $data) : void {
 		if($data !== null) {
 			if($this->onSubmit !== null) {
-                if ($this->buttons[$data]->getPermission() !== null && !$player->hasPermission($this->buttons[$data]->getPermission())) {
-                    $player->sendMessage("§cYou don't have permission to use this button");
-                    return;
-                }
+				if ($this->buttons[$data]->getPermission() !== null && !$player->hasPermission($this->buttons[$data]->getPermission())) {
+					$player->sendMessage("§cYou don't have permission to use this button");
+					return;
+				}
 				($this->onSubmit)($player, $this->buttons[$data]->getName());
 			}
 		} else {

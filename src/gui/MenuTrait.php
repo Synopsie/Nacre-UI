@@ -1,19 +1,19 @@
 <?php
 
 /*
- *     _      ____    _  __     _      _   _   ___      _
- *    / \    |  _ \  | |/ /    / \    | \ | | |_ _|    / \
- *   / _ \   | |_) | | ' /    / _ \   |  \| |  | |    / _ \
- *  / ___ \  |  _ <  | . \   / ___ \  | |\  |  | |   / ___ \
- * /_/   \_\ |_| \_\ |_|\_\ /_/   \_\ |_| \_| |___| /_/   \_\
+ *  ____   __   __  _   _    ___    ____    ____    ___   _____
+ * / ___|  \ \ / / | \ | |  / _ \  |  _ \  / ___|  |_ _| | ____|
+ * \___ \   \ V /  |  \| | | | | | | |_) | \___ \   | |  |  _|
+ *  ___) |   | |   | |\  | | |_| | |  __/   ___) |  | |  | |___
+ * |____/    |_|   |_| \_|  \___/  |_|     |____/  |___| |_____|
  *
  * Nacre-UI est une API destiné aux formulaires,
  * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
  * mais aussi éviter les taches fastidieuses à faire.
  *
- * @author Julien
- * @link https://arkaniastudios.com/Nacre-UI
- * @version 1.0.0
+ * @author SynopsieTeam
+ * @link https://nacre.arkaniastudios.com/home.html
+ * @version 2.0.0
  *
  */
 
@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace nacre\gui;
 
 use nacre\form\trait\PermissibleTrait;
-use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 
 trait MenuTrait {
@@ -38,9 +37,12 @@ trait MenuTrait {
 	/** @var ?callable */
 	private $closeHandler;
 
+	/**
+	 * @param InventoryContent[]|null $contents
+	 */
 	public function __construct(
 		Player $player,
-		string|Translatable $name,
+		string $name,
 		bool $viewOnly = false,
 		?array $contents = null,
 		?callable $clickHandler = null,
@@ -50,7 +52,9 @@ trait MenuTrait {
 		$this->name     = $name;
 		$this->viewOnly = $viewOnly;
 		if($contents !== null) {
-			$this->setContents($contents);
+			foreach ($contents as $content) {
+				$this->setItem($content->getSlot(), $content->getItem());
+			}
 		}
 		$this->clickHandler = $clickHandler;
 		$this->closeHandler = $closeHandler;

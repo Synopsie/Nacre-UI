@@ -19,33 +19,25 @@
 
 declare(strict_types=1);
 
-namespace nacre\form\elements\customs;
+namespace nacre\gui;
 
-use nacre\form\elements\Element;
+use pocketmine\item\Item;
 
-final class Label extends Element {
-	public function __construct(
-		string $text
-	) {
-		parent::__construct($text);
+final class InventoryContent {
+	public int $slot;
+	public Item $item;
+
+	public function __construct(int $slot, Item $item) {
+		$this->slot = $slot;
+		$this->item = $item;
 	}
 
-	public function getType() : string {
-		return 'label';
+	public function getSlot() : int {
+		return $this->slot;
 	}
 
-	public function handler($data) : mixed {
-		return $data;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function jsonSerialize() : array {
-		return [
-			'type' => $this->getType(),
-			'text' => $this->getName()
-		];
+	public function getItem() : Item {
+		return $this->item;
 	}
 
 }
