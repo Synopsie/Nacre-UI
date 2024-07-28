@@ -27,7 +27,6 @@ use nacre\gui\MenuTrait;
 use pocketmine\block\inventory\ChestInventory;
 use pocketmine\block\tile\Nameable;
 use pocketmine\block\VanillaBlocks;
-use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\convert\TypeConverter;
 use pocketmine\network\mcpe\protocol\BlockActorDataPacket;
@@ -47,7 +46,7 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 	 */
 	public function __construct(
 		Player $player,
-		string|Translatable $name,
+		string $name,
 		bool $viewOnly = false,
 		?array $contents = null,
 		?callable $clickHandler = null,
@@ -55,7 +54,7 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 		?string $permission = null
 	) {
 		parent::__construct($player->getPosition());
-		$this->__menuConstruct($name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
+		$this->__menuConstruct($player, $name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
 	}
 
 	private array $isSent = [];
