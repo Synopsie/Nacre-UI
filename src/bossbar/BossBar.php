@@ -87,7 +87,6 @@ class BossBar {
      */
     public function removePlayer(Player $player) : static {
         if(!isset($this->players[$player->getId()])){
-            GlobalLogger::get()->debug("Removed player that was not added to the boss bar (" . $this . ")");
             return $this;
         }
         $this->sendRemoveBossPacket([$player]);
@@ -169,7 +168,6 @@ class BossBar {
     public function setPercentage(float $percentage) : static {
         $percentage = (float) min(1.0, max(0.0, $percentage));
         $this->getAttributeMap()->get(Attribute::HEALTH)->setValue($percentage * $this->getAttributeMap()->get(Attribute::HEALTH)->getMaxValue(), true, true);
-        #$this->sendAttributesPacket($this->getPlayers());
         $this->sendBossHealthPacket($this->getPlayers());
 
         return $this;
@@ -181,10 +179,6 @@ class BossBar {
 
     public function getColor(): int {
         return $this->color;
-    }
-
-    public static function getColorByName(string $colorName): int {
-        return BossBarColor::getColorByName($colorName);
     }
 
     public function setColor(int $color): static {
