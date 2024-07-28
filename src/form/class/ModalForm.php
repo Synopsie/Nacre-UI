@@ -64,7 +64,7 @@ final class ModalForm extends BaseForm {
 					$player->sendMessage("§cYou don't have permission to use this button");
 					return;
 				}
-				($this->onSubmit)($player, $this->buttons[$data]->getName());
+				($this->onSubmit)($player, $this->buttons[!$data]->getName());
 			}
 		} else {
 			if($this->onClose !== null) {

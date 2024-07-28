@@ -36,13 +36,12 @@ final class CustomForm extends BaseForm {
 	private $onClose;
 
 	public function __construct(
-		Player $player,
 		string $title,
 		array $elements = [],
 		?callable $onSubmit = null,
 		?callable $onClose = null
 	) {
-		parent::__construct($player, $title);
+		parent::__construct($title);
 
 		$this->elements = $elements;
 		$this->onSubmit = $onSubmit;
