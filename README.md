@@ -27,3 +27,5 @@ Nacre-UI est développé par [ArkaniaStudios](https://arkaniastudios.com). Merci
 - CameraAPI by kaxyum
 
 Profitez de la facilité de développement offerte par Nacre-UI et évitez les tâches fastidieuses grâce à cette API pratique ! 🛠️
+
+![Nacre-UI](nacre-ui.png)
