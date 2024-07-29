@@ -13,7 +13,7 @@
  *
  * @author SynopsieTeam
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
@@ -21,9 +21,14 @@ declare(strict_types=1);
 
 namespace nacre\form\listener;
 
+use nacre\Main;
+use pocketmine\entity\Attribute;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
+use pocketmine\scheduler\CancelTaskException;
+use pocketmine\scheduler\ClosureTask;
+
 use function is_null;
 use function json_decode;
 
@@ -44,6 +49,19 @@ final class FormListener implements Listener {
 							$event->cancel();
 						}
 					}
+					if($player === null || !$player->isConnected()) {
+						continue;
+					}
+					Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
+						$times = 5; // send for up to 5 x 10 ticks (or 2500ms)
+						Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
+							--$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
+							$networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
+							$networkSession->getEntityEventBroadcaster()->syncAttributes([$networkSession], $player, [
+								$player->getAttributeMap()->get(Attribute::EXPERIENCE_LEVEL)
+							]);
+						}), 10);
+					}), 1);
 				}
 			}
 		}
