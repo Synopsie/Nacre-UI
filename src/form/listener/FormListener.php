@@ -13,7 +13,7 @@
  *
  * @author SynopsieTeam
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
@@ -49,19 +49,19 @@ final class FormListener implements Listener {
 							$event->cancel();
 						}
 					}
-                    if($player === null || !$player->isConnected()){
-                        continue;
-                    }
-                    Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function() use($player, $networkSession) : void{
-                        $times = 5; // send for up to 5 x 10 ticks (or 2500ms)
-                        Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function() use($player, $networkSession, &$times) : void{
-                            --$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
-                            $networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
-                            $networkSession->getEntityEventBroadcaster()->syncAttributes([$networkSession], $player, [
-                                $player->getAttributeMap()->get(Attribute::EXPERIENCE_LEVEL)
-                            ]);
-                        }), 10);
-                    }), 1);
+					if($player === null || !$player->isConnected()) {
+						continue;
+					}
+					Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
+						$times = 5; // send for up to 5 x 10 ticks (or 2500ms)
+						Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
+							--$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
+							$networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
+							$networkSession->getEntityEventBroadcaster()->syncAttributes([$networkSession], $player, [
+								$player->getAttributeMap()->get(Attribute::EXPERIENCE_LEVEL)
+							]);
+						}), 10);
+					}), 1);
 				}
 			}
 		}
