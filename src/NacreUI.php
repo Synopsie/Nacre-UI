@@ -11,9 +11,9 @@
  * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
  * mais aussi éviter les taches fastidieuses à faire.
  *
- * @author SynopsieTeam
+ * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.1
+ * @version 2.0.3
  *
  */
 
@@ -29,23 +29,22 @@ use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginBase;
 
 class NacreUI extends PluginBase {
+	private static bool $isRegistered = false;
+	private static ?Plugin $plugin    = null;
 
-    private static bool $isRegistered = false;
-    private static ?Plugin $plugin = null;
+	public static function getPlugin() : Plugin {
+		return self::$plugin ?? throw new InvalidArgumentException("Plugin not registered");
+	}
 
-    public static function getPlugin() : Plugin {
-        return self::$plugin ?? throw new InvalidArgumentException("Plugin not registered");
-    }
+	public static function register(Plugin $plugin) : bool {
+		if(self::$isRegistered) {
+			return false;
+		}
+		self::$isRegistered = true;
+		$plugin->getServer()->getPluginManager()->registerEvents(new FormListener(), $plugin);
+		$plugin->getServer()->getPluginManager()->registerEvents(new MenuListener(), $plugin);
+		$plugin->getServer()->getPluginManager()->registerEvents(new BossListener(), $plugin);
+		return true;
 
-    public static function register(Plugin $plugin) : bool {
-        if(self::$isRegistered) {
-            return false;
-        }
-        self::$isRegistered = true;
-        $plugin->getServer()->getPluginManager()->registerEvents(new FormListener(), $plugin);
-        $plugin->getServer()->getPluginManager()->registerEvents(new MenuListener(), $plugin);
-        $plugin->getServer()->getPluginManager()->registerEvents(new BossListener(), $plugin);
-        return true;
-
-    }
+	}
 }

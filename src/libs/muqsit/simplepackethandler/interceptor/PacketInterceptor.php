@@ -11,9 +11,9 @@
  * elle permet aux développeurs d'avoir une compatibilité entre toutes les interfaces,
  * mais aussi éviter les taches fastidieuses à faire.
  *
- * @author SynopsieTeam
+ * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.1
+ * @version 2.0.3
  *
  */
 
