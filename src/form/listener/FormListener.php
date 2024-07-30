@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.3
+ * @version 2.0.4
  *
  */
 
@@ -43,12 +43,12 @@ final class FormListener implements Listener {
 				}
 				foreach ($event->getTargets() as $networkSession) {
 					$player = $networkSession->getPlayer();
-					if(!isset($data['permission']) || !is_null($data['permission'])) {
+					/*if(!isset($data['permission'])) {
 						if(!$player->hasPermission($data['permission'])) {
 							$player->sendMessage("§cYou don't have permission to use this form");
 							$event->cancel();
 						}
-					}
+					}*/
 					if($player === null || !$player->isConnected()) {
 						continue;
 					}

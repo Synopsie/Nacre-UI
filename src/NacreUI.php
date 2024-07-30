@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.3
+ * @version 2.0.4
  *
  */
 
@@ -41,6 +41,7 @@ class NacreUI extends PluginBase {
 			return false;
 		}
 		self::$isRegistered = true;
+		self::$plugin       = $plugin;
 		$plugin->getServer()->getPluginManager()->registerEvents(new FormListener(), $plugin);
 		$plugin->getServer()->getPluginManager()->registerEvents(new MenuListener(), $plugin);
 		$plugin->getServer()->getPluginManager()->registerEvents(new BossListener(), $plugin);
