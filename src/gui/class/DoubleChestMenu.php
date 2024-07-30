@@ -124,7 +124,7 @@ final class DoubleChestMenu extends DoubleChestInventory implements BaseMenu {
 				)
 			);
 			$player->getNetworkSession()->sendDataPacket($packet);
-			NacreUI::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
+			NacreUI::getPlugin()->getScheduler()->scheduleDelayedTask(new ClosureTask(
 				function () use ($player) : void {
 					$player->setCurrentWindow($this);
 				}

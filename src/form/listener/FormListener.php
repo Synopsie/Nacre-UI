@@ -43,7 +43,7 @@ final class FormListener implements Listener {
 				}
 				foreach ($event->getTargets() as $networkSession) {
 					$player = $networkSession->getPlayer();
-					if(!is_null($data['permission'])) {
+					if(!isset($data['permission']) || !is_null($data['permission'])) {
 						if(!$player->hasPermission($data['permission'])) {
 							$player->sendMessage("§cYou don't have permission to use this form");
 							$event->cancel();
@@ -52,9 +52,9 @@ final class FormListener implements Listener {
 					if($player === null || !$player->isConnected()) {
 						continue;
 					}
-					NacreUI::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
+					NacreUI::getPlugin()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
 						$times = 5; // send for up to 5 x 10 ticks (or 2500ms)
-						NacreUI::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
+						NacreUI::getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
 							--$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
 							$networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
 							$networkSession->getEntityEventBroadcaster()->syncAttributes([$networkSession], $player, [
