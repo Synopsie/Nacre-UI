@@ -21,23 +21,31 @@ declare(strict_types=1);
 
 namespace nacre;
 
+use InvalidArgumentException;
 use nacre\bossbar\BossListener;
 use nacre\form\listener\FormListener;
 use nacre\gui\listener\MenuListener;
+use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\SingletonTrait;
 
-class Main extends PluginBase {
-	use SingletonTrait;
+class NacreUI extends PluginBase {
 
-	protected function onLoad() : void {
-		self::setInstance($this);
-		$this->getLogger()->info('§8-> §eChargement de §6Nacre-UI§e...');
-	}
+    private static bool $isRegistered = false;
+    private static ?Plugin $plugin = null;
 
-	protected function onEnable() : void {
-		$this->getServer()->getPluginManager()->registerEvents(new FormListener(), $this);
-		$this->getServer()->getPluginManager()->registerEvents(new MenuListener(), $this);
-		$this->getServer()->getPluginManager()->registerEvents(new BossListener(), $this);
-	}
+    public static function getPlugin() : Plugin {
+        return self::$plugin ?? throw new InvalidArgumentException("Plugin not registered");
+    }
+
+    public static function register(Plugin $plugin) : bool {
+        if(self::$isRegistered) {
+            return false;
+        }
+        self::$isRegistered = true;
+        $plugin->getServer()->getPluginManager()->registerEvents(new FormListener(), $plugin);
+        $plugin->getServer()->getPluginManager()->registerEvents(new MenuListener(), $plugin);
+        $plugin->getServer()->getPluginManager()->registerEvents(new BossListener(), $plugin);
+        return true;
+
+    }
 }

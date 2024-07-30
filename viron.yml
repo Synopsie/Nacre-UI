@@ -1,7 +1,6 @@
 name: Nacre-UI
-version: 2.0.1
-main: nacre\Main
-src-namespace-prefix: nacre
+version: 2.0.2
+antigen: nacre
 api: 5.0.0
 authors:
   - Julien

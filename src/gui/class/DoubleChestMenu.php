@@ -23,7 +23,7 @@ namespace nacre\gui\class;
 
 use nacre\gui\BaseMenu;
 use nacre\gui\MenuTrait;
-use nacre\Main;
+use nacre\NacreUI;
 use pocketmine\block\inventory\ChestInventory;
 use pocketmine\block\inventory\DoubleChestInventory;
 use pocketmine\block\tile\Nameable;
@@ -124,7 +124,7 @@ final class DoubleChestMenu extends DoubleChestInventory implements BaseMenu {
 				)
 			);
 			$player->getNetworkSession()->sendDataPacket($packet);
-			Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
+			NacreUI::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
 				function () use ($player) : void {
 					$player->setCurrentWindow($this);
 				}

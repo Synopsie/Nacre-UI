@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace nacre\form\listener;
 
-use nacre\Main;
+use nacre\NacreUI;
 use pocketmine\entity\Attribute;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketSendEvent;
@@ -52,9 +52,9 @@ final class FormListener implements Listener {
 					if($player === null || !$player->isConnected()) {
 						continue;
 					}
-					Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
+					NacreUI::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
 						$times = 5; // send for up to 5 x 10 ticks (or 2500ms)
-						Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
+						NacreUI::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
 							--$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
 							$networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
 							$networkSession->getEntityEventBroadcaster()->syncAttributes([$networkSession], $player, [

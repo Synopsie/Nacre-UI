@@ -21,5 +21,11 @@
             "email": "dumontj357@gmail.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "virion": {
+            "spec": "3.0",
+            "namespace-root": "nacre"
+        }
+    }
 }
