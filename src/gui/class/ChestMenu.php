@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -94,6 +94,6 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
-        $this->sendInv($player);
+		$this->sendInv($player);
 	}
 }

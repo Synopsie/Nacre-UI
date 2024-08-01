@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -29,7 +29,6 @@ use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
 use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\ClosureTask;
 
-use function is_null;
 use function json_decode;
 
 final class FormListener implements Listener {

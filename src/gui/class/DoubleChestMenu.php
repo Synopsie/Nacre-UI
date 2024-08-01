@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -86,9 +86,9 @@ final class DoubleChestMenu extends DoubleChestInventory implements BaseMenu {
 			);
 			unset($this->isSent[$who->getXuid()]);
 		}
-        if($this->closeHandler !== null) {
-            ($this->closeHandler)($who, $this);
-        }
+		if($this->closeHandler !== null) {
+			($this->closeHandler)($who, $this);
+		}
 		parent::onClose($who);
 	}
 
@@ -134,7 +134,7 @@ final class DoubleChestMenu extends DoubleChestInventory implements BaseMenu {
 			), 2);
 			$this->isSent[$player->getXuid()] = true;
 		}
-        $this->sendInv($player);
+		$this->sendInv($player);
 	}
 
 }

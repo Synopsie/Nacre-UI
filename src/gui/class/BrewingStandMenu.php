@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -65,9 +65,9 @@ class BrewingStandMenu extends BrewingStandInventory implements BaseMenu {
 			));
 			unset($this->isSent[$who->getXuid()]);
 		}
-        if($this->closeHandler !== null) {
-            ($this->closeHandler)($who, $this);
-        }
+		if($this->closeHandler !== null) {
+			($this->closeHandler)($who, $this);
+		}
 		parent::onClose($who);
 	}
 
@@ -93,7 +93,7 @@ class BrewingStandMenu extends BrewingStandInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
-        $this->sendInv($player);
+		$this->sendInv($player);
 	}
 
 }

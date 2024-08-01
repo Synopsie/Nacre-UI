@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -80,16 +80,16 @@ trait MenuTrait {
 		return $this->viewOnly;
 	}
 
-    public function closeInventory(Player $player) : void {
-        if($this->closeHandler !== null) {
-            ($this->closeHandler)($player, $this);
-        }
-        $session = Session::get($player);
-        $session->setCurrent(null);
-    }
+	public function closeInventory(Player $player) : void {
+		if($this->closeHandler !== null) {
+			($this->closeHandler)($player, $this);
+		}
+		$session = Session::get($player);
+		$session->setCurrent(null);
+	}
 
-    protected function sendInv(Player $player) : void {
-        $session = Session::get($player);
-        $session->setCurrent($this);
-    }
+	protected function sendInv(Player $player) : void {
+		$session = Session::get($player);
+		$session->setCurrent($this);
+	}
 }

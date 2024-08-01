@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -30,6 +30,7 @@ use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\Listener;
 use pocketmine\inventory\transaction\action\SlotChangeAction;
+use function is_null;
 
 final class MenuListener implements Listener {
 	public function onInventoryTransaction(InventoryTransactionEvent $event) : void {
@@ -66,15 +67,15 @@ final class MenuListener implements Listener {
 		}
 	}
 
-    public function onInventoryClose(InventoryCloseEvent $event) : void {
-        $player = $event->getPlayer();
-        $session = Session::get($player);
-        $current = $session->getCurrent();
+	public function onInventoryClose(InventoryCloseEvent $event) : void {
+		$player  = $event->getPlayer();
+		$session = Session::get($player);
+		$current = $session->getCurrent();
 
-        if(!is_null($current)) {
-            $current->closeInventory($player);
-        }
+		if(!is_null($current)) {
+			$current->closeInventory($player);
+		}
 
-    }
+	}
 
 }

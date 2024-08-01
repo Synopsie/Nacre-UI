@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.4
+ * @version 2.0.5
  *
  */
 
@@ -25,11 +25,10 @@ use pocketmine\permission\Permission;
 use pocketmine\player\Player;
 
 interface BaseMenu {
-
 	public function isViewOnly() : bool;
 	public function getName() : string;
 	public function getClickHandler() : ?callable;
 	public function getCloseHandler() : ?callable;
 	public function getPermission() : null|Permission|string;
-    public function closeInventory(Player $player) : void;
+	public function closeInventory(Player $player) : void;
 }
