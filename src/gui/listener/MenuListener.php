@@ -24,6 +24,8 @@ namespace nacre\gui\listener;
 use nacre\gui\BaseMenu;
 use nacre\gui\transaction\MenuTransaction;
 use nacre\gui\transaction\MenuTransactionResult;
+use nacre\session\Session;
+use pocketmine\event\inventory\InventoryCloseEvent;
 use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\Listener;
@@ -63,4 +65,16 @@ final class MenuListener implements Listener {
 			}
 		}
 	}
+
+    public function onInventoryClose(InventoryCloseEvent $event) : void {
+        $player = $event->getPlayer();
+        $session = Session::get($player);
+        $current = $session->getCurrent();
+
+        if(!is_null($current)) {
+            $current->closeInventory($player);
+        }
+
+    }
+
 }

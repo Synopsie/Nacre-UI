@@ -93,6 +93,7 @@ final class HopperMenu extends HopperInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
+        $this->send($player);
 	}
 
 }

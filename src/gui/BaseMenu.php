@@ -22,11 +22,14 @@ declare(strict_types=1);
 namespace nacre\gui;
 
 use pocketmine\permission\Permission;
+use pocketmine\player\Player;
 
 interface BaseMenu {
+
 	public function isViewOnly() : bool;
 	public function getName() : string;
 	public function getClickHandler() : ?callable;
 	public function getCloseHandler() : ?callable;
 	public function getPermission() : null|Permission|string;
+    public function closeInventory(Player $player) : void;
 }

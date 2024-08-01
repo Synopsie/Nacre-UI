@@ -93,5 +93,6 @@ class StonecutterMenu extends StonecutterInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
+        $this->send($player);
 	}
 }

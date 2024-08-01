@@ -134,6 +134,7 @@ final class DoubleChestMenu extends DoubleChestInventory implements BaseMenu {
 			), 2);
 			$this->isSent[$player->getXuid()] = true;
 		}
+        $this->send($player);
 	}
 
 }

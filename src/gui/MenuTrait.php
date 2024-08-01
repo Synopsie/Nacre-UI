@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace nacre\gui;
 
 use nacre\form\trait\PermissibleTrait;
+use nacre\session\Session;
 use pocketmine\player\Player;
 
 trait MenuTrait {
@@ -79,4 +80,16 @@ trait MenuTrait {
 		return $this->viewOnly;
 	}
 
+    public function closeInventory(Player $player) : void {
+        if($this->closeHandler !== null) {
+            ($this->closeHandler)($player, $this);
+        }
+        $session = Session::get($player);
+        $session->setCurrent(null);
+    }
+
+    public function send(Player $player) : void {
+        $session = Session::get($player);
+        $session->setCurrent($this);
+    }
 }
