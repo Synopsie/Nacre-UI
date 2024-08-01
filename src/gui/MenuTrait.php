@@ -88,7 +88,7 @@ trait MenuTrait {
         $session->setCurrent(null);
     }
 
-    public function send(Player $player) : void {
+    protected function sendInv(Player $player) : void {
         $session = Session::get($player);
         $session->setCurrent($this);
     }

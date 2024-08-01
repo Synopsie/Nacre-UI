@@ -72,7 +72,7 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 		parent::onClose($who);
 	}
 
-	protected function send(Player $player) : void {
+	public function send(Player $player) : void {
 		if (!isset($this->isSent[$player->getXuid()])) {
 			$this->holder = new Position(
 				(int) $player->getPosition()->getX(),
@@ -94,6 +94,6 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
-        $this->send($player);
+        $this->sendInv($player);
 	}
 }

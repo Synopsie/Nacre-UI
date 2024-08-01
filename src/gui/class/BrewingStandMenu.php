@@ -93,7 +93,7 @@ class BrewingStandMenu extends BrewingStandInventory implements BaseMenu {
 			$player->setCurrentWindow($this);
 			$this->isSent[$player->getXuid()] = true;
 		}
-        $this->send($player);
+        $this->sendInv($player);
 	}
 
 }
