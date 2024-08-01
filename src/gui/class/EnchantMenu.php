@@ -65,6 +65,9 @@ class EnchantMenu extends EnchantInventory implements BaseMenu {
 			));
 			unset($this->isSent[$who->getXuid()]);
 		}
+        if($this->closeHandler !== null) {
+            ($this->closeHandler)($who, $this);
+        }
 		parent::onClose($who);
 	}
 

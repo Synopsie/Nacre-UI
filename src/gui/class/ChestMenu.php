@@ -69,6 +69,9 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 			));
 			unset($this->isSent[$who->getXuid()]);
 		}
+        if($this->closeHandler !== null) {
+            ($this->closeHandler)($who, $this);
+        }
 		parent::onClose($who);
 	}
 

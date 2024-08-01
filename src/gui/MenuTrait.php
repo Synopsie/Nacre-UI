@@ -79,11 +79,4 @@ trait MenuTrait {
 		return $this->viewOnly;
 	}
 
-	public function onClose(Player $who) : void {
-		parent::onClose($who);
-		if($this->closeHandler !== null) {
-			($this->closeHandler)($who, $this);
-		}
-	}
-
 }
