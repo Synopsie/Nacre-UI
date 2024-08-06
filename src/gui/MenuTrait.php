@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.5
+ * @version 3.0.0
  *
  */
 
@@ -39,23 +39,23 @@ trait MenuTrait {
 	/** @var ?callable */
 	private $closeHandler;
 
-    private Inventory $inventory;
+	private Inventory $inventory;
 
 	/**
 	 * @param InventoryContent[]|null $contents
 	 */
 	public function __construct(
-        Inventory $inventory,
-        string $name,
-        bool $viewOnly = false,
+		Inventory $inventory,
+		string $name,
+		bool $viewOnly = false,
 		?array $contents = null,
 		?callable $clickHandler = null,
 		?callable $closeHandler = null,
 		?string $permission = null
 	) {
-        $this->inventory = $inventory;
-		$this->name     = $name;
-		$this->viewOnly = $viewOnly;
+		$this->inventory = $inventory;
+		$this->name      = $name;
+		$this->viewOnly  = $viewOnly;
 		if($contents !== null) {
 			foreach ($contents as $content) {
 				$this->setItem($content->getSlot(), $content->getItem());
@@ -97,7 +97,7 @@ trait MenuTrait {
 		$session->setCurrent($this);
 	}
 
-    public function getInventory() : Inventory {
-        return $this->inventory;
-    }
+	public function getInventory() : Inventory {
+		return $this->inventory;
+	}
 }

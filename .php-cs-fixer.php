@@ -133,7 +133,7 @@ mais aussi éviter les taches fastidieuses à faire.
 
 @author Synopsie
 @link https://nacre.arkaniastudios.com/home.html
-@version 2.0.5
+@version 3.0.0
 
 BODY,
             'location' => 'after_open'

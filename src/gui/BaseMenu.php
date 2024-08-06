@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.5
+ * @version 3.0.0
  *
  */
 
@@ -32,5 +32,5 @@ interface BaseMenu {
 	public function getCloseHandler() : ?callable;
 	public function getPermission() : null|Permission|string;
 	public function closeInventory(Player $player) : void;
-    public function getInventory() : Inventory;
+	public function getInventory() : Inventory;
 }

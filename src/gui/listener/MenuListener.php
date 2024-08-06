@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 2.0.5
+ * @version 3.0.0
  *
  */
 
@@ -49,7 +49,7 @@ final class MenuListener implements Listener {
 								$event->cancel();
 							}
 						}
-                        return;
+						return;
 					}
 					if ($inventory->isViewOnly()) {
 						$event->cancel();
