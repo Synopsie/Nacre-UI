@@ -45,7 +45,6 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 	 * @param InventoryContent[]|null $contents
 	 */
 	public function __construct(
-		Player $player,
 		string $name,
 		bool $viewOnly = false,
 		?array $contents = null,
@@ -53,8 +52,8 @@ class ChestMenu extends ChestInventory implements BaseMenu {
 		?callable $closeHandler = null,
 		?string $permission = null
 	) {
-		parent::__construct($player->getPosition());
-		$this->__menuConstruct($player, $name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
+		parent::__construct(new Position(0, 0, 0, null));
+		$this->__menuConstruct($name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
 	}
 
 	private array $isSent = [];

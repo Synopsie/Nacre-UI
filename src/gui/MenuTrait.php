@@ -42,7 +42,6 @@ trait MenuTrait {
 	 * @param InventoryContent[]|null $contents
 	 */
 	public function __construct(
-		Player $player,
 		string $name,
 		bool $viewOnly = false,
 		?array $contents = null,
