@@ -52,7 +52,7 @@ final class FormListener implements Listener {
 						continue;
 					}
 					NacreUI::getPlugin()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player, $networkSession) : void {
-						$times = 5; // send for up to 5 x 10 ticks (or 2500ms)
+						$times = 5;
 						NacreUI::getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(static function () use ($player, $networkSession, &$times) : void {
 							--$times >= 0 || throw new CancelTaskException("Maximum retries exceeded");
 							$networkSession->isConnected() || throw new CancelTaskException("Maximum retries exceeded");
