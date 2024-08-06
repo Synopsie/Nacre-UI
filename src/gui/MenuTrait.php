@@ -23,6 +23,7 @@ namespace nacre\gui;
 
 use nacre\form\trait\PermissibleTrait;
 use nacre\session\Session;
+use pocketmine\inventory\Inventory;
 use pocketmine\player\Player;
 
 trait MenuTrait {
@@ -38,17 +39,21 @@ trait MenuTrait {
 	/** @var ?callable */
 	private $closeHandler;
 
+    private Inventory $inventory;
+
 	/**
 	 * @param InventoryContent[]|null $contents
 	 */
 	public function __construct(
-		string $name,
-		bool $viewOnly = false,
+        Inventory $inventory,
+        string $name,
+        bool $viewOnly = false,
 		?array $contents = null,
 		?callable $clickHandler = null,
 		?callable $closeHandler = null,
 		?string $permission = null
 	) {
+        $this->inventory = $inventory;
 		$this->name     = $name;
 		$this->viewOnly = $viewOnly;
 		if($contents !== null) {
@@ -91,4 +96,8 @@ trait MenuTrait {
 		$session = Session::get($player);
 		$session->setCurrent($this);
 	}
+
+    public function getInventory() : Inventory {
+        return $this->inventory;
+    }
 }

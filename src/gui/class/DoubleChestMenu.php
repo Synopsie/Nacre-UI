@@ -54,7 +54,7 @@ final class DoubleChestMenu extends SimpleInventory implements BaseMenu, BlockIn
         ?string $permission = null
     ) {
         parent::__construct(54);
-        $this->__menuConstruct($name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
+        $this->__menuConstruct($this, $name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
     }
 
     private array $isSent = [];

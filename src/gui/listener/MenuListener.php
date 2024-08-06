@@ -30,6 +30,7 @@ use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\Listener;
 use pocketmine\inventory\transaction\action\SlotChangeAction;
+
 use function is_null;
 
 final class MenuListener implements Listener {
@@ -48,6 +49,7 @@ final class MenuListener implements Listener {
 								$event->cancel();
 							}
 						}
+                        return;
 					}
 					if ($inventory->isViewOnly()) {
 						$event->cancel();

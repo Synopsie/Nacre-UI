@@ -42,9 +42,9 @@ final class MenuTransaction {
 		$this->slot      = $slot;
 	}
 
-	public function getInventory() : BaseMenu {
-		return $this->inventory;
-	}
+    public function getInventory() : BaseMenu {
+        return $this->inventory;
+    }
 
 	public function getSource() : Item {
 		return $this->source;

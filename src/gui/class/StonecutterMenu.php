@@ -49,7 +49,7 @@ class StonecutterMenu extends StonecutterInventory implements BaseMenu {
 		?string $permission = null
 	) {
 		parent::__construct(new Position(0, 0, 0, null));
-		$this->__menuConstruct($name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
+		$this->__menuConstruct($this, $name, $viewOnly, $contents, $clickHandler, $closeHandler, $permission);
 	}
 
 	private array $isSent = [];
