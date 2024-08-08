@@ -27,7 +27,7 @@ Besoin d'aide ou avez-vous des questions ? N'hésitez pas à nous contacter ou �
 
 ## Crédits
 
-Nacre-UI est développé par [ArkaniaStudios](https://arkaniastudios.com). Merci à toute l'équipe pour son travail acharné et son dévouement à améliorer l'expérience de développement pour la communauté Minecraft.
+Nacre-UI est développé par [Synopsie](https://arkaniastudios.com). Merci à toute l'équipe pour son travail acharné et son dévouement à améliorer l'expérience de développement pour la communauté Minecraft.
 
 - CameraAPI by kaxyum
 
