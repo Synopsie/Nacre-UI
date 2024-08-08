@@ -2,19 +2,24 @@
 
 Facilitez le développement de formulaires avec Nacre-UI, une API polyvalente conçue pour assurer une compatibilité harmonieuse entre toutes les interfaces.
 
+## Fonctionnalités disponibles
+- Formulaire
+- GUI
+- BossBar
+- ScoreBoard
+- Caméra
+
+## Installation
+Pour installer [Nacre-UI](https://github.com/Synopsie/Nacre-UI) dans votre projet, si vous utilisez [composer](https://getcomposer.org/):
+`````injectablephp
+composer require synopsie/nacre-ui
+`````
+
+Si vous n'utilisez pas [composer](https://getcomposer.org/), alors je vous invite à mettre l'API entièrement dans votre projet, et a changer les namespaces.
+
 ## Documentation
 
 [Lien vers la coumentation](https://nacre.arkaniastudios.com/home.html)
-
-## Nouveautés de cette Version
-
-- Simplification des tâches fastidieuses liées à la création et à la gestion de formulaires.
-- Amélioration de la compatibilité avec différentes interfaces pour une expérience utilisateur homogène.
-- Correction de bugs mineurs pour une utilisation plus fluide.
-
-## Pour Commencer
-
-Intégrez dès maintenant la dernière version de Nacre-UI à vos projets et simplifiez la gestion des formulaires pour les développeurs et les utilisateurs.
 
 ## Support
 

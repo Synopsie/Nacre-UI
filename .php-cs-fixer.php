@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace arkania;
+namespace synopsie;
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
@@ -133,7 +133,7 @@ mais aussi éviter les taches fastidieuses à faire.
 
 @author Synopsie
 @link https://nacre.arkaniastudios.com/home.html
-@version 3.0.0
+@version 3.0.1
 
 BODY,
             'location' => 'after_open'
