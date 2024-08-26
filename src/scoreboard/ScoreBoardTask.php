@@ -28,7 +28,7 @@ class ScoreBoardTask extends Task {
             "dummy",
             SetDisplayObjectivePacket::SORT_ORDER_ASCENDING
         );
-        $lines = ($this->replaced)();
+        $lines = ($this->replaced)($this->scoreBoard->getScoreBoardContent()->getLines());
         foreach ($lines as $number => $text) {
             $scoreboard->addLine($number, $text);
         }
