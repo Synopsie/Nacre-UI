@@ -51,10 +51,6 @@ class BossBar {
 	private AttributeMap $attributeMap;
 	protected EntityMetadataCollection $propertyManager;
 
-	/**
-	 * BossBar constructor.
-	 * This will not spawn the bar, since there would be no players to spawn it to
-	 */
 	public function __construct() {
 		$this->attributeMap = new AttributeMap();
 		/** @var AttributeFactory $attributeFactory */
@@ -100,11 +96,10 @@ class BossBar {
 		return $this;
 	}
 
-	/**
-	 * Removes a single player from this bar.
-	 * Use @param Player $player
-	 * @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
-	 */
+    /**
+     * @param Player $player
+     * @return BossBar @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
+     */
 	public function removePlayer(Player $player) : static {
 		if(!isset($this->players[$player->getId()])) {
 			return $this;
@@ -124,9 +119,6 @@ class BossBar {
 		return $this;
 	}
 
-	/**
-	 * Removes all players from this bar
-	 */
 	public function removeAllPlayers() : static {
 		foreach($this->getPlayers() as $player) {
 			$this->removePlayer($player);
@@ -141,9 +133,6 @@ class BossBar {
 		return $this->title;
 	}
 
-	/**
-	 * Text above the bar. Can be empty. Should be single-line
-	 */
 	public function setTitle(string $title = "") : static {
 		$this->title = $title;
 		$this->sendBossTextPacket($this->getPlayers());
@@ -154,19 +143,12 @@ class BossBar {
 		return $this->subTitle;
 	}
 
-	/**
-	 * Optional text below the bar. Can be empty
-	 */
 	public function setSubTitle(string $subTitle = "") : static {
 		$this->subTitle = $subTitle;
-		#$this->sendEntityDataPacket($this->getPlayers());
 		$this->sendBossTextPacket($this->getPlayers());
 		return $this;
 	}
 
-	/**
-	 * The full title as a combination of the title and its subtitle. Automatically fixes encoding issues caused by newline characters
-	 */
 	public function getFullTitle() : string {
 		$text = $this->title;
 		if (!empty($this->subTitle)) {
@@ -205,9 +187,6 @@ class BossBar {
 	}
 
 	/**
-	 * Hides the bar from the specified players without removing it.
-	 * Useful when saving some bandwidth or when you'd like to keep the entity
-	 *
 	 * @param Player[] $players
 	 */
 	public function hideFrom(array $players) : void {
@@ -219,24 +198,17 @@ class BossBar {
 		}
 	}
 
-	/**
-	 * Hides the bar from all registered players
-	 */
 	public function hideFromAll() : void {
 		$this->hideFrom($this->getPlayers());
 	}
 
 	/**
-	 * Displays the bar to the specified players
 	 * @param Player[] $players
 	 */
 	public function showTo(array $players) : void {
 		$this->sendBossPacket($players);
 	}
 
-	/**
-	 * Displays the bar to all registered players
-	 */
 	public function showToAll() : void {
 		$this->showTo($this->getPlayers());
 	}
@@ -248,9 +220,6 @@ class BossBar {
 		return Server::getInstance()->getWorldManager()->findEntity($this->actorId);
 	}
 
-	/**
-	 * STILL TODO, SHOULD NOT BE USED YET
-	 */
 	public function setEntity(?Entity $entity = null) : static {
 		if($entity instanceof Entity && ($entity->isClosed() || $entity->isFlaggedForDespawn())) {
 			throw new InvalidArgumentException("Entity $entity can not be used since its not valid anymore (closed or flagged for despawn)");
@@ -273,7 +242,6 @@ class BossBar {
 		} else {
 			$this->actorId = Entity::nextRuntimeId();
 		}
-		#if (!$entity instanceof Player) $this->sendSpawnPacket($this->getPlayers());
 		$this->sendBossPacket($this->getPlayers());
 		return $this;
 	}
