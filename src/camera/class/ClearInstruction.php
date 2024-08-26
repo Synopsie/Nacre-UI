@@ -19,26 +19,31 @@
 
 declare(strict_types=1);
 
-namespace nacre\scoreboard;
+namespace nacre\camera\class;
 
-final class ScoreBoardContent {
-	private string $title;
-	private array $lines;
+use nacre\camera\interface\Instruction;
+use pocketmine\network\mcpe\protocol\CameraInstructionPacket;
+use pocketmine\player\Player;
 
-	public function __construct(
-		string $title,
-		...$lines
-	) {
-		$this->title = $title;
-		$this->lines = $lines;
+final class ClearInstruction implements Instruction {
+	private bool $clear;
+
+	public function __construct(bool $clear) {
+		$this->clear = $clear;
 	}
 
-	public function getTitle() : string {
-		return $this->title;
+	public function setClear(bool $clear) : void {
+		$this->clear = $clear;
 	}
 
-	public function getLines() : array {
-		return $this->lines;
+	public function send(Player $player) : void {
+		$player->getNetworkSession()->sendDataPacket(
+			CameraInstructionPacket::create(
+				null,
+				$this->clear,
+				null
+			)
+		);
 	}
 
 }

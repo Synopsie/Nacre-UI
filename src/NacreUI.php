@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 3.0.1
+ * @version 4.0.0
  *
  */
 
@@ -23,8 +23,14 @@ namespace nacre;
 
 use InvalidArgumentException;
 use nacre\bossbar\BossListener;
+use nacre\camera\CameraPresets;
 use nacre\form\listener\FormListener;
 use nacre\gui\listener\MenuListener;
+use nacre\libs\muqsit\simplepackethandler\SimplePacketHandler;
+use pocketmine\event\EventPriority;
+use pocketmine\network\mcpe\NetworkSession;
+use pocketmine\network\mcpe\protocol\CameraPresetsPacket;
+use pocketmine\network\mcpe\protocol\SetLocalPlayerAsInitializedPacket;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginBase;
 
@@ -42,6 +48,13 @@ class NacreUI extends PluginBase {
 		}
 		self::$isRegistered = true;
 		self::$plugin       = $plugin;
+
+		$interceptor = SimplePacketHandler::createInterceptor($plugin, EventPriority::HIGHEST);
+		$interceptor->interceptIncoming(function (SetLocalPlayerAsInitializedPacket $pk, NetworkSession $target) : bool {
+			$target->sendDataPacket(CameraPresetsPacket::create(CameraPresets::getAll()));
+			return true;
+		});
+
 		$plugin->getServer()->getPluginManager()->registerEvents(new FormListener(), $plugin);
 		$plugin->getServer()->getPluginManager()->registerEvents(new MenuListener(), $plugin);
 		$plugin->getServer()->getPluginManager()->registerEvents(new BossListener(), $plugin);

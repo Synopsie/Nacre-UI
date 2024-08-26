@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 3.0.1
+ * @version 4.0.0
  *
  */
 
@@ -96,10 +96,9 @@ class BossBar {
 		return $this;
 	}
 
-    /**
-     * @param Player $player
-     * @return BossBar @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
-     */
+	/**
+	 * @return BossBar @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
+	 */
 	public function removePlayer(Player $player) : static {
 		if(!isset($this->players[$player->getId()])) {
 			return $this;

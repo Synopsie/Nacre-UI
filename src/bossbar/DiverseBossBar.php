@@ -13,7 +13,7 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 3.0.1
+ * @version 4.0.0
  *
  */
 
