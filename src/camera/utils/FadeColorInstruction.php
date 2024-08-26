@@ -13,25 +13,39 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 3.0.1
+ * @version 4.0.0
  *
  */
 
 declare(strict_types=1);
 
-namespace nacre\camera\Instructions;
+namespace nacre\camera\utils;
 
-use pocketmine\network\mcpe\protocol\CameraInstructionPacket;
-use pocketmine\player\Player;
+final class FadeColorInstruction {
+	private float $red;
+	private float $green;
+	private float $blue;
 
-final class ClearCameraInstruction extends CameraInstruction {
-	private ?bool $clear = true;
-
-	public function setClear(bool $clear) : void {
-		$this->clear = $clear;
+	public function __construct(
+		float $red,
+		float $green,
+		float $blue
+	) {
+		$this->red   = $red;
+		$this->green = $green;
+		$this->blue  = $blue;
 	}
 
-	public function send(Player $player) : void {
-		$player->getNetworkSession()->sendDataPacket(CameraInstructionPacket::create(null, $this->clear, null));
+	public function getRed() : float {
+		return $this->red;
 	}
+
+	public function getBlue() : float {
+		return $this->blue;
+	}
+
+	public function getGreen() : float {
+		return $this->green;
+	}
+
 }

@@ -13,16 +13,17 @@
  *
  * @author Synopsie
  * @link https://nacre.arkaniastudios.com/home.html
- * @version 3.0.1
+ * @version 4.0.0
  *
  */
 
 declare(strict_types=1);
 
-namespace nacre\camera\Instructions;
+namespace nacre\camera\interface;
 
 use pocketmine\player\Player;
 
-abstract class CameraInstruction {
-	abstract public function send(Player $player) : void;
+interface Instruction {
+	public function send(Player $player) : void;
+
 }

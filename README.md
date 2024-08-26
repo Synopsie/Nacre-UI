@@ -29,8 +29,6 @@ Besoin d'aide ou avez-vous des questions ? N'hésitez pas à nous contacter ou �
 
 Nacre-UI est développé par [Synopsie](https://arkaniastudios.com). Merci à toute l'équipe pour son travail acharné et son dévouement à améliorer l'expérience de développement pour la communauté Minecraft.
 
-- CameraAPI by kaxyum
-
 Profitez de la facilité de développement offerte par Nacre-UI et évitez les tâches fastidieuses grâce à cette API pratique ! 🛠️
 
 ![Nacre-UI](nacre-ui.png)
