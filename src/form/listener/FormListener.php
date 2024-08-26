@@ -21,13 +21,16 @@ declare(strict_types=1);
 
 namespace nacre\form\listener;
 
+use nacre\form\DialogFormCache;
 use nacre\NacreUI;
 use pocketmine\entity\Attribute;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
+use pocketmine\network\mcpe\protocol\NpcRequestPacket;
 use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\ClosureTask;
+use pocketmine\Server;
 
 use function json_decode;
 
@@ -62,7 +65,23 @@ final class FormListener implements Listener {
 						}), 10);
 					}), 1);
 				}
-			}
+			}elseif($packet instanceof NpcRequestPacket) {
+                $entity = Server::getInstance()->getWorldManager()->findEntity($packet->actorRuntimeId);
+                switch ($packet->requestType) {
+                    case NpcRequestPacket::REQUEST_EXECUTE_ACTION:
+                        $form = DialogFormCache::getFormByEntity($entity);
+                        if($form === null) {
+                            return;
+                        }
+                        foreach ($event->getTargets() as $networkSession) {
+                            $player = $networkSession->getPlayer();
+                            ($form->getSubmitCallable())($player);
+                        }
+                        break;
+                    case NpcRequestPacket::REQUEST_EXECUTE_OPENING_COMMANDS:
+
+                }
+            }
 		}
 	}
 }
