@@ -1,9 +1,0 @@
-name: Nacre-UI
-version: 4.0.0
-antigen: nacre
-api: 5.0.0
-authors:
-  - Julien
-  - TEZULS
-  - JustTim
-  - kaxyum
