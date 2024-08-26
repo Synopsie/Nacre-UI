@@ -12,15 +12,28 @@ class ScoreBoardTask extends Task {
     private ScoreBoard $scoreBoard;
     /** @var callable $replaced */
     private $replaced;
+    /** @var callable|null $onDisconnect */
+    private $onDisconnect;
 
-    public function __construct(ScoreBoard $scoreboard, callable $replaced) {
+    public function __construct(ScoreBoard $scoreboard, callable $replaced, ?callable $onDisconnect = null) {
         $this->scoreBoard = $scoreboard;
         Utils::validateCallableSignature(function (array $lines) : array{}, $replaced);
+        Utils::validateCallableSignature(function () : void{}, $onDisconnect);
         $this->replaced = $replaced;
+        $this->onDisconnect = $onDisconnect;
     }
 
     public function onRun() : void {
         $scoreboard = $this->scoreBoard;
+
+        if(!$scoreboard->getPlayer()->isOnline()) {
+            if($this->onDisconnect !== null) {
+                ($this->onDisconnect)();
+            }
+            $this->getHandler()->cancel();
+            return;
+        }
+
         $pk = SetDisplayObjectivePacket::create(
             SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR,
             $scoreboard->getPlayer()->getName(),
